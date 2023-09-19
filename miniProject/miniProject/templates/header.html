@@ -1,0 +1,174 @@
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Oasis</title>
+
+    <meta name="description" content="Amdesk - Help Center HTML template for your digital products">
+    <meta name="keywords" content="helpdesk, forum, template, HTML template, responsive, clean">
+    <meta name="author" content="nK">
+
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- START: Styles -->
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700%7cMaven+Pro:400,500,700"
+        rel="stylesheet"><!-- %7c -->
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/dist/css/bootstrap.min.css' %}">
+
+    <!-- Fancybox -->
+    <link rel="stylesheet" href="{% static 'vendor/fancybox/dist/jquery.fancybox.min.css' %}">
+
+    <!-- Pe icon 7 stroke -->
+    <link rel="stylesheet" href="{% static 'vendor/pixeden-stroke-7-icon/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css' %}">
+
+    <!-- Swiper -->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/swiper/dist/css/swiper.min.css' %}">
+
+    <!-- Bootstrap Select -->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap-select/dist/css/bootstrap-select.min.css' %}">
+
+    <!-- Dropzone -->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/dropzone/dist/min/dropzone.min.css' %}">
+
+    <!-- Quill -->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/quill/dist/quill.snow.css' %}">
+
+    <!-- Font Awesome -->
+    <script defer src="{% static 'vendor/fontawesome-free/js/all.js' %}"></script>
+    <script defer src="{% static 'vendor/fontawesome-free/js/v4-shims.js' %}"></script>
+
+    <!-- Amdesk -->
+    <link rel="stylesheet" href="{% static 'css/amdesk.min.css' %}">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    <!-- END: Styles -->
+
+    <!-- jQuery -->
+    <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
+
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav
+        class="dx-navbar dx-navbar-top dx-navbar-collapse dx-navbar-sticky dx-navbar-expand-lg dx-navbar-dropdown-triangle dx-navbar-autohide">
+        <div class="container">
+
+            <a href="{% url 'home' %}" class="dx-nav-logo">
+                <h2 class="text-white" style="margin-top:0px; padding-top:10px; margin-bottom:0;">Oasis</h2>
+            </a>
+
+            
+            <button type="button" class="dx-navbar-burger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span style="color:white">Menu</span> </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'home' %}">Home</a>
+                <a class="dropdown-item" href="{% url 'blog' %}">Blog</a>
+                <a class="dropdown-item" href="{% url 'user-post' %}">Post A Topic</a>
+                <div class="dropdown-divider"></div>
+                {% if user.is_authenticated %}
+                <a class="dropdown-item" href="{% url 'user-dashboard' %}">Dashboard</a>
+                <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+                <a class="dropdown-item" href="{% url 'register' %}">Register</a>
+                {% endif %}
+            </div>
+
+            <div class="dx-navbar-content">
+
+                <ul class="dx-nav dx-nav-align-left">
+
+                    {% if user.is_authenticated %}
+                    <li class="dx-drop-item">
+                        <a href="{% url 'home' %}">
+                            Home
+                        </a>    
+                    </li>
+                    <li class="dx-drop-item">
+                        <a href="{% url 'blog' %}">
+                            Blog
+                        </a>
+                    </li>
+                    <li class="dx-drop-item">
+                        <a href="{% url 'about' %}">
+                            About
+                        </a>
+                    </li>
+                    <li class="dx-drop-item">
+                        <a href="{% url 'user-post' %}">
+                            Post A Topic
+                        </a>
+                    </li>
+                    <li class="dx-drop-item">
+                        <a href="{% url 'feedback' %}">
+                            ContactUs
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="dx-drop-item">
+                        <a href="{% url 'home' %}">
+                            Home
+                        </a>    
+                    </li>
+                 
+                    {% endif %}
+                    
+
+                </ul>
+
+                <ul class="dx-nav dx-nav-align-right">
+                    
+                    {% if user.is_authenticated %}
+                    <li>
+                        <div class="dropdown dx-dropdown dx-dropdown-signin">
+                            <a class="dx-nav-signin" href="account.html" role="button" id="dropdownSignin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {%if user.author.profile_pic %}
+                                <span class="dx-nav-signin-img"><img src="{{ user.author.profile_pic.url }}" alt=""></span>
+                                {%else%}
+                                <span class="dx-nav-signin-img"><img src="{%static 'images/pro_pic.PNG'%}" alt=""></span>
+                                {% endif %}
+                                <span class="dx-nav-signin-name">{{ user.username }}</span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownSignin">
+                                <li>
+                                    <a href="{% url 'user-dashboard' %}">Dashboard</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'profile' %}">Profile</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'logout' %}">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li>
+                        
+                        <a href="{% url 'login' %}">Log In</a>
+                    </li>
+                    <li>
+                        <span><a href="{% url 'register' %}" class="dx-btn dx-btn-md dx-btn-transparent">Sign Up</a></span>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Navbar -->
